@@ -1,1 +1,143 @@
 Hello Git!
+
+(base) web3@web3-VirtualBox:~$ mkdir sam
+(base) web3@web3-VirtualBox:~$ cd sam
+(base) web3@web3-VirtualBox:~/sam$ ls
+(base) web3@web3-VirtualBox:~/sam$ ls -s
+total 0
+(base) web3@web3-VirtualBox:~/sam$ ls -a
+.  ..
+(base) web3@web3-VirtualBox:~/sam$ mkdir Exp3
+(base) web3@web3-VirtualBox:~/sam$ cd Exp3
+(base) web3@web3-VirtualBox:~/sam/Exp3$ gedit f1.txt
+(base) web3@web3-VirtualBox:~/sam/Exp3$ gedit f2.txt
+(base) web3@web3-VirtualBox:~/sam/Exp3$ gedit my_file.txt
+(base) web3@web3-VirtualBox:~/sam/Exp3$ ls
+f1.txt  f2.txt  my_file.txt
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git init
+Initialized empty Git repository in /home/web3/sam/Exp3/.git/
+(base) web3@web3-VirtualBox:~/sam/Exp3$ echo "Welcome to Git">my_file.txt
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git add my_file.txt
+(base) web3@web3-VirtualBox:~/sam/Exp3$ gedit my_file.txt
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git commit -m "First commit"
+[master (root-commit) 028a61f] First commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 my_file.txt
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git branch
+* master
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git branch feature-branch
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git branch
+  feature-branch
+* master
+(base) web3@web3-VirtualBox:~/sam/Exp3$ ls
+f1.txt  f2.txt  my_file.txt
+(base) web3@web3-VirtualBox:~/sam/Exp3$ gedit my_file.txt
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   my_file.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	f1.txt
+	f2.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git stash save "first stash"
+Saved working directory and index state On master: first stash
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git status
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	f1.txt
+	f2.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git stash list
+stash@{0}: On master: first stash
+(base) web3@web3-VirtualBox:~/sam/Exp3$ gedit my_file.txt
+(base) web3@web3-VirtualBox:~/sam/Exp3$ gedit my_file.txt
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   my_file.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	f1.txt
+	f2.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git stash save "second stash"
+Saved working directory and index state On master: second stash
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git stash list
+stash@{0}: On master: second stash
+stash@{1}: On master: first stash
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git status
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	f1.txt
+	f2.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git stash list
+stash@{0}: On master: second stash
+stash@{1}: On master: first stash
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git checkout feature-branch
+Switched to branch 'feature-branch'
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git branch
+* feature-branch
+  master
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git stash apply stash@{0}
+On branch feature-branch
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   my_file.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	f1.txt
+	f2.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+(base) web3@web3-VirtualBox:~/sam/Exp3$ gedit my_file.txt
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git add my_file.txt
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git commit -m 
+error: switch `m' requires a value
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git commit -m "second stash"
+[feature-branch 27352d5] second stash
+ 1 file changed, 1 insertion(+)
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git status
+On branch feature-branch
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	f1.txt
+	f2.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git stash apply stash@{1}
+Auto-merging my_file.txt
+CONFLICT (content): Merge conflict in my_file.txt
+(base) web3@web3-VirtualBox:~/sam/Exp3$ gedit my_file.txt
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git add my_file.txt
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git commit -m "first stash"
+[feature-branch d870a2b] first stash
+ 1 file changed, 2 insertions(+)
+(base) web3@web3-VirtualBox:~/sam/Exp3$ gedit my_file.txt
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git branch
+* feature-branch
+  master
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git checkout master
+Switched to branch 'master'
+(base) web3@web3-VirtualBox:~/sam/Exp3$ git branch
+  feature-branch
+* master
+(base) web3@web3-VirtualBox:~/sam/Exp3$ gedit my_file.txt
+(base) web3@web3-VirtualBox:~/sam/Exp3$ 
+
